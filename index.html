@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assetto Corsa Shared Leaderboard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 40px;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        h1 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.3rem;
+        }
+        p.subtitle {
+            color: #8b949e;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+        }
+        th {
+            background-color: #21262d;
+            color: #f0f6fc;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+        th:hover {
+            background-color: #30363d;
+        }
+        th::after {
+            content: " ↕";
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background-color: #1f242c;
+        }
+        code {
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+            background-color: rgba(110,118,129,0.4);
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
+            font-size: 85%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assetto Corsa Shared Leaderboard</h1>
+    <p class="subtitle">Comparing: <strong>B Leduc</strong> vs <strong>A Duhamel</strong> (Click column headers to sort)</p>
+    
+    <table id="leaderboard">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Car</th>
+                <th onclick="sortTable(1)">Track</th>
+                <th onclick="sortTable(2, true)">Best Lap Time</th>
+                <th onclick="sortTable(3, true)">Date</th>
+                <th onclick="sortTable(4)">Holder</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td data-sort="ABARTH500">Abarth500</td><td data-sort="KS_VALLELUNGA-CLUB_CIRCUIT">Ks Vallelunga-Club Circuit</td><td data-sort="63452">01:03.452</td><td data-sort="1784302450184">2026-07-17</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="ALFA_ROMEO_GIULIETTA_QV">Alfa Romeo Giulietta Qv</td><td data-sort="MAGIONE">Magione</td><td data-sort="94070">01:34.070</td><td data-sort="1783846463299">2026-07-12</td><td><strong>B Leduc</strong></td></tr><tr><td data-sort="BMW_1M">Bmw 1M</td><td data-sort="KS_NURBURGRING-LAYOUT_GP_B">Ks Nurburgring-Layout Gp B</td><td data-sort="146387">02:26.387</td><td data-sort="1784830526571">2026-07-23</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="BMW_M3_E30_S1">Bmw M3 E30 S1</td><td data-sort="KS_NURBURGRING-LAYOUT_SPRINT_B">Ks Nurburgring-Layout Sprint B</td><td data-sort="110928">01:50.928</td><td data-sort="1784732117735">2026-07-22</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="BMW_M3_E30_S1">Bmw M3 E30 S1</td><td data-sort="MAGIONE">Magione</td><td data-sort="97051">01:37.051</td><td data-sort="1784469791427">2026-07-19</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="BMW_M3_E92">Bmw M3 E92</td><td data-sort="KS_NURBURGRING-LAYOUT_SPRINT_A">Ks Nurburgring-Layout Sprint A</td><td data-sort="109752">01:49.752</td><td data-sort="1784829012665">2026-07-23</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="BMW_Z4">Bmw Z4</td><td data-sort="KS_NURBURGRING-LAYOUT_SPRINT_A">Ks Nurburgring-Layout Sprint A</td><td data-sort="111351">01:51.351</td><td data-sort="1784731438555">2026-07-22</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="BMW_Z4">Bmw Z4</td><td data-sort="KS_NURBURGRING-LAYOUT_SPRINT_B">Ks Nurburgring-Layout Sprint B</td><td data-sort="108641">01:48.641</td><td data-sort="1784729336028">2026-07-22</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="BMW_Z4_GT3">Bmw Z4 Gt3</td><td data-sort="KS_NURBURGRING-LAYOUT_GP_A">Ks Nurburgring-Layout Gp A</td><td data-sort="129941">02:09.941</td><td data-sort="1784831106382">2026-07-23</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="CF_VIPER_GT3-R">Cf Viper Gt3-R</td><td data-sort="LILSKI_WATKINS_GLEN-BOOT">Lilski Watkins Glen-Boot</td><td data-sort="109342">01:49.342</td><td data-sort="1785182798799">2026-07-27</td><td><strong>B Leduc</strong></td></tr><tr><td data-sort="FERRARI_LAFERRARI">Ferrari Laferrari</td><td data-sort="KS_VALLELUNGA-EXTENDED_CIRCUIT">Ks Vallelunga-Extended Circuit</td><td data-sort="101187">01:41.187</td><td data-sort="1788300852741">2026-09-01</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="KS_FERRARI_488_GT3">Ks Ferrari 488 Gt3</td><td data-sort="KS_BARCELONA-LAYOUT_GP">Ks Barcelona-Layout Gp</td><td data-sort="113660">01:53.660</td><td data-sort="1788977022768">2026-09-09</td><td><strong>B Leduc</strong></td></tr><tr><td data-sort="KS_FORD_MUSTANG_2015">Ks Ford Mustang 2015</td><td data-sort="KS_VALLELUNGA-EXTENDED_CIRCUIT">Ks Vallelunga-Extended Circuit</td><td data-sort="122693">02:02.693</td><td data-sort="1788300161475">2026-09-01</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="KS_LOTUS_72D">Ks Lotus 72D</td><td data-sort="LILSKI_WATKINS_GLEN-BOOT">Lilski Watkins Glen-Boot</td><td data-sort="122505">02:02.505</td><td data-sort="1786566682304">2026-08-12</td><td><strong>B Leduc</strong></td></tr><tr><td data-sort="KS_NISSAN_GTR_GT3">Ks Nissan Gtr Gt3</td><td data-sort="KS_BARCELONA-LAYOUT_GP">Ks Barcelona-Layout Gp</td><td data-sort="115285">01:55.285</td><td data-sort="1788963007560">2026-09-09</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="KS_NISSAN_GTR_GT3">Ks Nissan Gtr Gt3</td><td data-sort="KS_NORDSCHLEIFE-NORDSCHLEIFE">Ks Nordschleife-Nordschleife</td><td data-sort="432288">07:12.288</td><td data-sort="1788640156946">2026-09-05</td><td><strong>B Leduc</strong></td></tr><tr><td data-sort="KS_NISSAN_GTR_GT3">Ks Nissan Gtr Gt3</td><td data-sort="SPA">Spa</td><td data-sort="153306">02:33.306</td><td data-sort="1786569373041">2026-08-12</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="KTM_XBOW_R">Ktm Xbow R</td><td data-sort="IMOLA">Imola</td><td data-sort="122382">02:02.382</td><td data-sort="1784922306658">2026-07-24</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="KTM_XBOW_R">Ktm Xbow R</td><td data-sort="KS_NURBURGRING-LAYOUT_SPRINT_A">Ks Nurburgring-Layout Sprint A</td><td data-sort="100241">01:40.241</td><td data-sort="1785083661927">2026-07-26</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="KTM_XBOW_R">Ktm Xbow R</td><td data-sort="KS_VALLELUNGA-EXTENDED_CIRCUIT">Ks Vallelunga-Extended Circuit</td><td data-sort="109313">01:49.313</td><td data-sort="1785085960038">2026-07-26</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="LOTUS_ELISE_SC">Lotus Elise Sc</td><td data-sort="KS_SILVERSTONE-NATIONAL">Ks Silverstone-National</td><td data-sort="71045">01:11.045</td><td data-sort="1785832650520">2026-08-04</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="LOTUS_EXIGE_240_S3">Lotus Exige 240 S3</td><td data-sort="KS_SILVERSTONE-NATIONAL">Ks Silverstone-National</td><td data-sort="65551">01:05.551</td><td data-sort="1787350331223">2026-08-21</td><td><strong>B Leduc</strong></td></tr><tr><td data-sort="NIX_SUZUKI_SWIFT_SPORT_HT81S">Nix Suzuki Swift Sport Ht81S</td><td data-sort="AUTUMNRINGMINI">Autumnringmini</td><td data-sort="48048">00:48.048</td><td data-sort="1788975852914">2026-09-09</td><td><strong>A Duhamel</strong></td></tr><tr><td data-sort="TATUUSFA1">Tatuusfa1</td><td data-sort="KS_BARCELONA-LAYOUT_GP">Ks Barcelona-Layout Gp</td><td data-sort="119832">01:59.832</td><td data-sort="1786569261227">2026-08-12</td><td><strong>B Leduc</strong></td></tr>
+        </tbody>
+    </table>
+
+    <script>
+    function sortTable(colIndex, isNumeric = false) {
+        const table = document.getElementById("leaderboard");
+        const tbody = table.tBodies[0];
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        
+        const currentDir = table.getAttribute("data-sort-dir") === "asc" ? "desc" : "asc";
+        table.setAttribute("data-sort-dir", currentDir);
+
+        rows.sort((a, b) => {
+            let cellA = a.cells[colIndex];
+            let cellB = b.cells[colIndex];
+
+            let valA = cellA.getAttribute("data-sort") !== null ? cellA.getAttribute("data-sort") : cellA.textContent.trim();
+            let valB = cellB.getAttribute("data-sort") !== null ? cellB.getAttribute("data-sort") : cellB.textContent.trim();
+
+            if (isNumeric) {
+                valA = parseFloat(valA) || 0;
+                valB = parseFloat(valB) || 0;
+            } else {
+                valA = valA.toLowerCase();
+                valB = valB.toLowerCase();
+            }
+
+            if (valA < valB) return currentDir === "asc" ? -1 : 1;
+            if (valA > valB) return currentDir === "asc" ? 1 : -1;
+            return 0;
+        });
+
+        rows.forEach(row => tbody.appendChild(row));
+    }
+    </script>
+</body>
+</html>
