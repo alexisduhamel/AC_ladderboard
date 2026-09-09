@@ -143,7 +143,7 @@ def format_date(timestamp_ms):
 
 def main():
   pb_dir = Path("./pb")
-  output_file = Path("ladderboard.html")
+  output_file = Path("index.html")
 
   ini_files = list(pb_dir.glob("*.ini")) + list(pb_dir.glob("*.lnk"))
 
