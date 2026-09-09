@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import re
+import subprocess
 
 try:
   import pylnk3
@@ -11,7 +12,6 @@ except ImportError:
   HAS_PYLNK = False
 
 # Optional: Set your Assetto Corsa root path here to read friendly names from ui_car.json / ui_track.json
-# Leave as None to use formatted folder names.
 AC_ROOT_PATH = None  # Example: Path(r"C:\Program Files (x86)\Steam\steamapps\common\assettocorsa")
 
 
@@ -49,7 +49,6 @@ def get_car_display_name(car_folder):
           return name
       except Exception:
         pass
-  # Fallback: Clean up internal name
   return car_folder.replace("_", " ").title()
 
 
@@ -79,7 +78,6 @@ def get_track_display_name(track_and_layout):
       except Exception:
         pass
 
-  # Fallback: Clean up internal name
   return track_and_layout.replace("_", " ").title()
 
 
@@ -331,6 +329,32 @@ def main():
 
   output_file.write_text(html_content, encoding="utf-8")
   print(f"Interactive HTML leaderboard generated at {output_file.resolve()}")
+
+  # Automatically commit and push index.html via Git
+  try:
+    subprocess.run(
+        ["git", "add", str(output_file)], check=True, capture_output=True
+    )
+    status = subprocess.run(
+        ["git", "diff", "--cached", "--quiet"], capture_output=True
+    )
+    if status.returncode != 0:
+      subprocess.run(
+          [
+              "git",
+              "commit",
+              "-m",
+              "Auto-update leaderboard index.html via update_pb.py",
+          ],
+          check=True,
+          capture_output=True,
+      )
+      subprocess.run(["git", "push"], check=True, capture_output=True)
+      print("Successfully committed and pushed index.html to GitHub.")
+    else:
+      print("No changes detected in index.html to commit.")
+  except Exception as e:
+    print(f"Git auto-commit/push skipped or failed: {e}")
 
 
 if __name__ == "__main__":
