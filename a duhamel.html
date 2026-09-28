@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Duhamel's Exclusive GT3 Records</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 40px;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        h1 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.3rem;
+        }
+        p.subtitle {
+            color: #8b949e;
+            margin-bottom: 20px;
+        }
+        .nav-links {
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            color: #58a6ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+        }
+        th {
+            background-color: #21262d;
+            color: #f0f6fc;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+        th:hover {
+            background-color: #30363d;
+        }
+        th::after {
+            content: " ↕";
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background-color: #1f242c;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-links">
+        <a href="index.html">&larr; Back to Main Leaderboard</a>
+    </div>
+    
+    <h1>A Duhamel's Exclusive GT3 Records</h1>
+    <p class="subtitle">Tracks where <strong>A Duhamel</strong> holds the best lap time exclusively (not held or beaten by the other pilot).</p>
+    
+    <table id="pilot-leaderboard">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Track</th>
+                <th onclick="sortTable(1)">Car</th>
+                <th onclick="sortTable(2, true)">Lap Time</th>
+                <th onclick="sortTable(3, true)">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td data-sort="GT_DRAGONTRAIL-2GARDEN">Gt Dragontrail-2Garden</td><td data-sort="KS_PORSCHE_911_GT3_CUP_2017">Ks Porsche 911 Gt3 Cup 2017</td><td data-sort="100251">01:40.251</td><td data-sort="1785190681950">2026-07-27</td></tr><tr><td data-sort="KS_BLACK_CAT_COUNTY-LAYOUT_INT">Ks Black Cat County-Layout Int</td><td data-sort="CF_VIPER_GT3-R">Cf Viper Gt3-R</td><td data-sort="148394">02:28.394</td><td data-sort="1784275556182">2026-07-17</td></tr><tr><td data-sort="KS_NURBURGRING-LAYOUT_GP_A">Ks Nurburgring-Layout Gp A</td><td data-sort="BMW_Z4_GT3">Bmw Z4 Gt3</td><td data-sort="129941">02:09.941</td><td data-sort="1784831106382">2026-07-23</td></tr><tr><td data-sort="KS_NURBURGRING-LAYOUT_SPRINT_A">Ks Nurburgring-Layout Sprint A</td><td data-sort="CF_VIPER_GT3-R">Cf Viper Gt3-R</td><td data-sort="89997">01:29.997</td><td data-sort="1784468388853">2026-07-19</td></tr><tr><td data-sort="PAUL_RICARD-GT_24H">Paul Ricard-Gt 24H</td><td data-sort="KS_FERRARI_488_GT3">Ks Ferrari 488 Gt3</td><td data-sort="180527">03:00.527</td><td data-sort="1785697213758">2026-08-02</td></tr><tr><td data-sort="SPA">Spa</td><td data-sort="KS_FERRARI_488_GT3">Ks Ferrari 488 Gt3</td><td data-sort="149422">02:29.422</td><td data-sort="1785195439304">2026-07-27</td></tr><tr><td data-sort="TRIALMOUNTAIN-FORWARD">Trialmountain-Forward</td><td data-sort="CF_VIPER_GT3-R">Cf Viper Gt3-R</td><td data-sort="116989">01:56.989</td><td data-sort="1785185870327">2026-07-27</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+    function sortTable(colIndex, isNumeric = false) {
+        const table = document.getElementById("pilot-leaderboard");
+        const tbody = table.tBodies[0];
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        
+        const currentDir = table.getAttribute("data-sort-dir") === "asc" ? "desc" : "asc";
+        table.setAttribute("data-sort-dir", currentDir);
+
+        rows.sort((a, b) => {
+            let cellA = a.cells[colIndex];
+            let cellB = b.cells[colIndex];
+
+            if (!cellA || !cellB) return 0;
+
+            let valA = cellA.getAttribute("data-sort") !== null ? cellA.getAttribute("data-sort") : cellA.textContent.trim();
+            let valB = cellB.getAttribute("data-sort") !== null ? cellB.getAttribute("data-sort") : cellB.textContent.trim();
+
+            if (isNumeric) {
+                valA = parseFloat(valA) || 0;
+                valB = parseFloat(valB) || 0;
+            } else {
+                valA = valA.toLowerCase();
+                valB = valB.toLowerCase();
+            }
+
+            if (valA < valB) return currentDir === "asc" ? -1 : 1;
+            if (valA > valB) return currentDir === "asc" ? 1 : -1;
+            return 0;
+        });
+
+        rows.forEach(row => tbody.appendChild(row));
+    }
+    </script>
+</body>
+</html>
